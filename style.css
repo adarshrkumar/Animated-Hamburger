@@ -1,0 +1,107 @@
+body {
+    margin: 0;
+    min-height: 100dvh;
+    display: grid;
+    place-items: center;
+}
+
+.hamburger {
+    box-sizing: border-box;
+
+    height: 200px;
+    aspect-ratio: 1;
+
+    border: solid 2px black;
+    cursor: pointer;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hamburger > .control {
+    position: absolute;
+    bottom: 100%;
+    right: 100%;
+    appearance: none;
+    margin: 0;
+}
+
+.hamburger > span {
+    --duration: 1s;
+    --timing: ease-in-out;
+
+    position: absolute;
+    left: 50%;
+    translate: -50% -50%;
+
+    height: 10px;
+    width: 70%;
+
+    background-color: black;
+    border-radius: 100vh;
+    &:not(:nth-of-type(2)) {
+        transform: translateY(0) rotate(0);
+        transition: transform var(--duration) var(--timing);
+        /* animation-fill-mode: forwards; */
+    }
+    &:nth-of-type(2) {
+        transform: translateX(0);
+        transition: transform var(--duration) var(--timing);
+    }
+}
+
+.hamburger > span:nth-of-type(1) {
+    --dir: -1;
+    top: 25%;
+}
+.hamburger > span:nth-of-type(2) {
+    --dir: 0;
+    top: 50%;
+}
+.hamburger > span:nth-of-type(3) {
+    --dir: 1;
+    top: 75%;
+}
+
+.hamburger:has(:checked) {
+    & > span {
+        &:not(:nth-of-type(2)) {
+            transform: translateY(calc(var(--dir) * -485%)) rotate(calc(-1*var(--dir) * 45deg));
+        }
+        &:nth-of-type(2) {
+            transform: translateX(145%);
+        }
+    }
+
+    &[data-reverse="true"] {
+        --direction: reverse; 
+    }
+}
+
+@keyframes blankAnimation {
+    from {
+
+    }
+    to {
+
+    }
+}
+
+@keyframes moveLines {
+    0% {
+        transform: 
+            translateY(0)
+            rotate(0);
+    }
+    100% {
+    }
+}
+
+@keyframes fadeLine {
+    0% {
+        transform: none;
+    }
+    50%, 100% {
+        transform: translateX(-130%);
+    }
+}
